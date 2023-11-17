@@ -1,7 +1,13 @@
 import cv2
-import numpy as np
 
 cap = cv2.VideoCapture("eye_recording.flv")
+
+# Get video properties
+frame_width = int(cap.get(3))
+frame_height = int(cap.get(4))
+
+# Define the codec and create a VideoWriter object
+output_video = cv2.VideoWriter("output_video.mp4", cv2.VideoWriter_fourcc(*'mp4v'), 30, (frame_width, frame_height))
 
 while True:
     ret, frame = cap.read()
@@ -20,7 +26,6 @@ while True:
     for cnt in contours:
         (x, y, w, h) = cv2.boundingRect(cnt)
 
-        #cv2.drawContours(roi, [cnt], -1, (0, 0, 255), 3)
         cv2.rectangle(roi, (x, y), (x + w, y + h), (255, 0, 0), 2)
         cv2.line(roi, (x + int(w/2), 0), (x + int(w/2), rows), (0, 255, 0), 2)
         cv2.line(roi, (0, y + int(h/2)), (cols, y + int(h/2)), (0, 255, 0), 2)
@@ -29,12 +34,14 @@ while True:
     cv2.imshow("Threshold", threshold)
     cv2.imshow("Gray ROI", gray_roi)
     cv2.imshow("Region of Interest", roi)
-
-    cv2.imwrite("roi_image.jpg", roi)
+    
+    # Write the frame to the output video file
+    output_video.write(frame)
 
     key = cv2.waitKey(30)
     if key == 27:
         break
 
-
+# Release the VideoWriter and close all windows
+output_video.release()
 cv2.destroyAllWindows()
