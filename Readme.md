@@ -2,14 +2,13 @@
 
 ## Pupil Movement
 
-![Pupil Movement ROI Image](./PupilMovement/roi_image.jpg)
 ![Gaze Tracking GIF](./PupilMovement/pupilMovement.gif)
 
 The image above illustrates the region of interest (ROI) for pupil movement analysis. This step is crucial for understanding and monitoring the movement of pupils for various applications.
 
 ## Gaze Tracking
 
-![Gaze Tracking GIF](./GazeTracking/GazeTracking.gif)
+![Gaze Tracking GIF](./PupilMovement/GazeTracking.gif)
 
 This GIF demonstrates eye movement tracking using the GazeTracking module. The system accurately determines the user's gaze direction.
 
